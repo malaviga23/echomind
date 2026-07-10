@@ -1,72 +1,103 @@
-import "./Register.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./register.css";
 
 function Register() {
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    role: ""
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formData);
+  };
+
   return (
-    <div className="register-container">
-      <div className="register-box">
-        <div className="logo">
-          <h1>
-            <span className="echo">Echo</span>
-            <span className="mind">Mind</span>
-          </h1>
-          <p>Create Your AI Memory Account</p>
-        </div>
+    
+  <div className="register-container">
 
-        <form>
-          <div className="input-box">
-            <label>Full Name</label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
+    <div className="auth-header">
+      <Link to="/" className="brand-link">
+        <img src="/logo.png" alt="EchoMind Logo" />
 
-          <div className="input-box">
-            <label>Email Address</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+        <h2>
+          <span className="echo">Echo</span>
+          <span className="mind">Mind</span>
+        </h2>
+      </Link>
+    </div>
 
-          <div className="input-box">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              placeholder="Enter your phone number"
-              required
-            />
-          </div>
+    <div className="register-box">
+        <h2>Create Account</h2>
 
-          <div className="input-box">
-            <label>Create Password</label>
-            <input
-              type="password"
-              placeholder="Create a password"
-              required
-            />
-          </div>
+        <form onSubmit={handleSubmit}>
 
-          <div className="input-box">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              placeholder="Confirm your password"
-              required
-            />
-          </div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            onChange={handleChange}
+            required
+          />
 
-          <button type="submit">Create Account</button>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />
 
-          <div className="login-link">
-            Already have an account? <a href="#">Login</a>
-          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="number"
+            name="age"
+            placeholder="Age"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="role"
+            placeholder="Role"
+            onChange={handleChange}
+            required
+          />
+
+          <button>Create Account</button>
+
         </form>
+
+        <p>
+          Already have an account?
+          <Link to="/login"> Login</Link>
+        </p>
+
       </div>
+
     </div>
   );
 }
 
-export default Register;bh 
+export default Register;

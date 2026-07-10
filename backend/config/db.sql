@@ -1,6 +1,7 @@
-create table users(
-name varchar(255),
-email varchar(255),
-password varchar(255),
-age int
+CREATE TABLE users (
+    name VARCHAR(255),
+    email VARCHAR(255),
+    password VARCHAR(255),
+    age INT,
+    role VARCHAR(50)
 );
