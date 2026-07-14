@@ -1,52 +1,91 @@
-import "./Login.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./login.css";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/authservice";
 
 function Login() {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+
+    const data = await loginUser(email, password);
+
+    alert(data.message);
+
+    if (data.token) {
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      navigate("/dashboard");
+
+    }
+
+  } catch (error) {
+
+    alert("Login Failed");
+
+    console.log(error);
+
+  }
+
+};
+
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="logo">
-          <h1>
-            <span className="echo">Echo</span>
-            <span className="mind">Mind</span>
-          </h1>
-          <p>Your AI Powered Second Brain</p>
-        </div>
+    
+  <div className="login-container">
 
-        <form>
-          <div className="input-box">
-            <label>Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+    <div className="auth-header">
+      <Link to="/" className="brand-link">
+        <img src="/logo.png" alt="EchoMind Logo" />
 
-          <div className="input-box">
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              required
-            />
-          </div>
+        <h2>
+          <span className="echo">Echo</span>
+          <span className="mind">Mind</span>
+        </h2>
+      </Link>
+    </div>
 
-          <div className="options">
-            <label>
-              <input type="checkbox" /> Remember Me
-            </label>
+    <div className="login-box">
 
-            <a href="#">Forgot Password?</a>
-          </div>
+        <h2>Login</h2>
 
-          <button type="submit">Login</button>
+        <form onSubmit={handleSubmit}>
 
-          <div className="signup">
-            Don't have an account?{" "}
-            <a href="#">Create Account</a>
-          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button>Login</button>
+
         </form>
+
+        <p>
+          Don't have an account?
+          <Link to="/register"> Register</Link>
+        </p>
+
       </div>
+
     </div>
   );
 }
