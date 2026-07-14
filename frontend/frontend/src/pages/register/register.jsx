@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./register.css";
+import { registerUser } from "../../services/authservice";
 
 function Register() {
 
@@ -19,12 +20,22 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    console.log(formData);
-  };
+  try {
 
+    const data = await registerUser(formData);
+
+    alert(data.message);
+
+  } catch (error) {
+
+    console.log(error);
+    alert("Registration Failed");
+
+  }
+};
   return (
     
   <div className="register-container">
