@@ -1,28 +1,51 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+
 function Navbar() {
   return (
     <header className="navbar">
 
       <div className="brand">
 
-           <img src="/logo.png" alt="EchoMind Logo" />
+    <div className="logo-container">
+
+        <img
+            src="/logo.png"
+            alt="EchoMind Logo"
+            className="logo"
+        />
+
+        <div className="logo-glow"></div>
+
+    </div>
+
+    <div className="brand-text">
 
         <h2>
-          <span className="echo">Echo</span>
-          <span className="mind">Mind</span>
+
+            <span className="echo">
+                ECHO
+            </span>
+
+            <span className="mind">
+                MIND
+            </span>
+
         </h2>
 
-      </div>
+        <p>AI Memory Engine</p>
 
-      <nav>
+    </div>
+
+</div>
+      <nav className="nav-links">
 
         <Link to="/">Home</Link>
 
-        <Link to="/#features">Features</Link>
+        <a href="#features">Features</a>
 
-        <Link to="/#about">About</Link>
+        <a href="#about">About</a>
 
         <Link to="/login" className="login-btn">
           Login
